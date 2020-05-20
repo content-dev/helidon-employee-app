@@ -1,7 +1,7 @@
 
 # Helidon Quickstart SE Example
 
-This project implements a simple Hello World REST service using Helidon SE.
+This project implements a simple REST service using Helidon SE.
 
 ## Prerequisites
 
@@ -29,19 +29,34 @@ mvn package
 ## Start the application
 
 ```
-java -jar target/helidon-quickstart-se.jar
+java -jar target/employee-app.jar
 ```
 
 ## Exercise the application
 
 ```
-curl -X GET http://localhost:8080/greet
-{"message":"Hello World!"}
+curl -X GET http://localhost:8080/employees
+- A list of employees
 
-curl -X GET http://localhost:8080/greet/Joe
-{"message":"Hello Joe!"}
+curl -X GET http://localhost:8080/employees/lastname/{name}
+- get employees by lastname
 
-curl -X PUT -H "Content-Type: application/json" -d '{"greeting" : "Hola"}' http://localhost:8080/greet/greeting
+curl -X GET http://localhost:8080/employees/department/{name}
+- get employees by department
+
+curl -X GET http://localhost:8080/employees/title/{name}
+- get employees by title
+
+curl -X PUT -H "Content-Type: application/json" -d '{
+"birthDate": "1980-08-26",
+"department": "Division",
+"email": "john.doe@example.com",
+"firstName": "Jonh",
+"id": "07700c37-a418-4762-9d7e-740ec1ea796e",
+"lastName": "Doe",
+"phone": "293-510-3451",
+"title": "Principal Factors Architect"
+}' http://localhost:8080/employees
 
 curl -X GET http://localhost:8080/greet/Jose
 {"message":"Hola Jose!"}
@@ -69,13 +84,13 @@ curl -H 'Accept: application/json' -X GET http://localhost:8080/metrics
 ## Build the Docker Image
 
 ```
-docker build -t helidon-quickstart-se .
+docker build -t employee-app .
 ```
 
 ## Start the application with Docker
 
 ```
-docker run --rm -p 8080:8080 helidon-quickstart-se:latest
+docker run --rm -p 8080:8080 employee-app:latest
 ```
 
 Exercise the application as described above
@@ -86,7 +101,7 @@ Exercise the application as described above
 kubectl cluster-info                # Verify which cluster
 kubectl get pods                    # Verify connectivity to cluster
 kubectl create -f app.yaml   # Deply application
-kubectl get service helidon-quickstart-se  # Get service info
+kubectl get service employee-app  # Get service info
 ```
 
 ## Native image with GraalVM
@@ -120,7 +135,7 @@ See https://github.com/oracle/helidon-build-tools/tree/master/helidon-maven-plug
 Start the application:
 
 ```
-./target/helidon-quickstart-se
+./target/employee-app
 ```
 
 ### Multi-stage Docker build
@@ -128,11 +143,11 @@ Start the application:
 Build the "native" Docker Image
 
 ```
-docker build -t helidon-quickstart-se-native -f Dockerfile.native .
+docker build -t employee-app -f Dockerfile.native .
 ```
 
 Start the application:
 
 ```
-docker run --rm -p 8080:8080 helidon-quickstart-se-native:latest
+docker run --rm -p 8080:8080 employee-app:latest
 ```
