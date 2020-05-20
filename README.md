@@ -1,7 +1,7 @@
 
-# Helidon Quickstart SE Example
+# Helidon Employee App
 
-This project implements a simple REST service using Helidon SE.
+This project implements a simple REST service using Helidon SE to display a list of employees.
 
 ## Prerequisites
 
@@ -41,11 +41,14 @@ curl -X GET http://localhost:8080/employees
 curl -X GET http://localhost:8080/employees/lastname/{name}
 - get employees by lastname
 
-curl -X GET http://localhost:8080/employees/department/{name}
+curl -X GET http://localhost:8080/employees/department/{department}
 - get employees by department
 
-curl -X GET http://localhost:8080/employees/title/{name}
+curl -X GET http://localhost:8080/employees/title/{title}
 - get employees by title
+
+curl -X GET http://localhost:8080/employees/{id}
+- get employee by id
 
 curl -X PUT -H "Content-Type: application/json" -d '{
 "birthDate": "1980-08-26",
@@ -58,8 +61,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 "title": "Principal Factors Architect"
 }' http://localhost:8080/employees
 
-curl -X GET http://localhost:8080/greet/Jose
-{"message":"Hola Jose!"}
+
 ```
 
 ## Try health and metrics

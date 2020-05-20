@@ -1,4 +1,6 @@
-target
+target/
+!**/src/main/**
+!**/src/test/**
 .classpath
 .dockerignore
 .project
